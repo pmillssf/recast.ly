@@ -8,17 +8,19 @@ class App extends React.Component {
     };
   }
 
-  
+  playClicked() {
+    console.log('clicked');
+  }
 
   render() {
     return (
     <div>
       <Nav />
       <div className="col-md-7">
-        <VideoPlayer video={window.exampleVideoData[0]}/>
+        <VideoPlayer video = {this.state.currentVideo}/>
       </div>
       <div className="col-md-5">
-        <VideoList videoList={window.exampleVideoData}/>
+        <VideoList videoList = {this.state.videoList}/>
       </div>
     </div>
       );
@@ -40,3 +42,5 @@ window.App = App;
 //     </div>
 //   </div>
 // );
+
+//videoList={window.exampleVideoData}

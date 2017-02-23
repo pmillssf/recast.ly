@@ -20,7 +20,7 @@ class App extends React.Component {
         <VideoPlayer video = {this.state.currentVideo}/>
       </div>
       <div className="col-md-5">
-        <VideoList videoList = {this.state.videoList}/>
+        <VideoList videoList = {this.state.videoList} titleClicked={this.playClicked}/>
       </div>
     </div>
       );

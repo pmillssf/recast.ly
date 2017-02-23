@@ -7,9 +7,24 @@ class App extends React.Component {
       videoList: window.exampleVideoData
     };
   }
-
-  playClicked() {
+//added event as a parameter
+  playClicked(event) {
     console.log('clicked');
+    console.log(event);
+    console.log(this);
+    console.log(this.state);
+    // Iterate through this.state.videoList 
+    for (var i = 0; i < this.state.videoList.length; i++) {
+      if (event === this.state.videoList[i].id.videoId) {
+        this.state.currentVideo = this.state.videoList[i];
+        break;
+      }
+     // check if event ==== videoId
+     //   if yes set this.state.currentVideo = the video
+    }
+    //newly added stuff:
+    //failed trial. "this" is currently null
+    // this.setState({currentVideo: this, videoList: window.exampleVideoData});
   }
 
   render() {

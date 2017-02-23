@@ -8,15 +8,13 @@ class App extends React.Component {
     };
   }
 //added event as a parameter
-  playClicked(event) {
+  playClicked(event, app) {
     console.log('clicked');
     console.log(event);
-    console.log(this);
-    console.log(this.state);
     // Iterate through this.state.videoList 
-    for (var i = 0; i < this.state.videoList.length; i++) {
-      if (event === this.state.videoList[i].id.videoId) {
-        this.state.currentVideo = this.state.videoList[i];
+    for (var i = 0; i < app.state.videoList.length; i++) {
+      if (event === app.state.videoList[i].id.videoId) {
+        app.setState({currentVideo: app.state.videoList[i]});
         break;
       }
      // check if event ==== videoId
@@ -35,7 +33,7 @@ class App extends React.Component {
         <VideoPlayer video = {this.state.currentVideo}/>
       </div>
       <div className="col-md-5">
-        <VideoList videoList = {this.state.videoList} titleClicked={this.playClicked}/>
+        <VideoList videoList={this.state.videoList} titleClicked={this.playClicked} app={this}/>
       </div>
     </div>
       );

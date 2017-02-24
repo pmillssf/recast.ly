@@ -15,7 +15,8 @@ class App extends React.Component {
   }
 
   onUserInput(param) {
-    this.getYouTubeVideos(param);
+    var debouncedYouTubeRequest = _.debounce((param)=>(this.getYouTubeVideos(param)), 500);
+    debouncedYouTubeRequest(param);
   }
 
   getYouTubeVideos(query) {

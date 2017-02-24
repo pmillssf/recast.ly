@@ -9,33 +9,51 @@ class App extends React.Component {
       videoList: window.exampleVideoData
     };
   }
+
+  componentDidMount () {
+    this.getYouTubeVideos('dogs');
+  }
+
+  onUserInput(param) {
+    this.getYouTubeVideos(param);
+  }
+
+  getYouTubeVideos(query) {
+    var options = {
+      key: window.YOUTUBE_API_KEY,
+      query: query
+    };
+
+    this.props.searchYouTube(options, (videoList) => {
+      this.setState({
+        videoList: videoList,
+        currentVideo: videoList[0]
+      });
+    });
+  }
+
 //added event as a parameter
-  playClicked(event, app) {
-    console.log('clicked');
-    console.log(event);
+  playClicked(event) {
     // Iterate through this.state.videoList 
-    for (var i = 0; i < app.state.videoList.length; i++) {
-      if (event === app.state.videoList[i].id.videoId) {
-        app.setState({currentVideo: app.state.videoList[i]});
+    for (var i = 0; i < this.state.videoList.length; i++) {
+      if (event === this.state.videoList[i].id.videoId) {
+        this.setState({currentVideo: this.state.videoList[i]});
         break;
       }
      // check if event ==== videoId
      //   if yes set this.state.currentVideo = the video
     }
-    //newly added stuff:
-    //failed trial. "this" is currently null
-    // this.setState({currentVideo: this, videoList: window.exampleVideoData});
   }
 
   render() {
     return (
     <div>
-      <Nav />
+      <Nav onUserInput={this.onUserInput.bind(this)} />
       <div className="col-md-7">
         <VideoPlayer video = {this.state.currentVideo}/>
       </div>
       <div className="col-md-5">
-        <VideoList videoList={this.state.videoList} titleClicked={this.playClicked} app={this}/>
+        <VideoList videoList={this.state.videoList} titleClicked={this.playClicked.bind(this)} />
       </div>
     </div>
       );
@@ -46,16 +64,3 @@ class App extends React.Component {
 // `var` declarations will only exist globally where explicitly defined
 window.App = App;
 
-// var App = () => (
-//   <div>
-//     <Nav />
-//     <div className="col-md-7">
-//       <VideoPlayer video={window.exampleVideoData[0]}/>
-//     </div>
-//     <div className="col-md-5">
-//       <VideoList videoList={window.exampleVideoData}/>
-//     </div>
-//   </div>
-// );
-
-//videoList={window.exampleVideoData}

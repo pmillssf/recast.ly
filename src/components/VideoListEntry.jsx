@@ -6,8 +6,7 @@ var VideoListEntry = (props) => (
     <div className="media-body">
       <div className="video-list-entry-title" onClick={function() {
         var videoId = props.video.id.videoId;
-        var app = props.app;
-        props.titleClicked(videoId, app); 
+        props.titleClicked(videoId); 
       } }>{props.video.snippet.title}</div>
       <div className="video-list-entry-detail">{props.video.snippet.description}</div>
     </div>

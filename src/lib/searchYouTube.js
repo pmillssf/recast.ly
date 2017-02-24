@@ -1,3 +1,6 @@
+window.youTubeVideos;
+window.searchYouTube = searchYouTube;
+
 var searchYouTube = (options, callback) => {
 
   // var url = 'https://www.googleapis.com/youtube/v3/search&key={' + window.YOUTUBE_API_KEY + '}';
@@ -10,7 +13,7 @@ var searchYouTube = (options, callback) => {
     contentType: 'application/json',
     success: function (data) {
       console.log('Youtube Search Results Returned');
-      console.log(data.items);
+      window.youTubeVideos = data.items;
       callback(data.items);
     },
     error: function (data) {
@@ -19,12 +22,3 @@ var searchYouTube = (options, callback) => {
     }
   });
 };
-
-window.searchYouTube = searchYouTube;
-
-// Options = {}
-// options.query = "";
-// options.max = 5
-// api = apkikey
-// parts: options.querey
-// maxresults: options.max
